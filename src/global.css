@@ -1,0 +1,16 @@
+/* global.css */
+:root {
+  --boder-color: #352148;
+  --boder-w: 1px;
+  --header-bg: linear-gradient(45deg, #111827 0%, #3b0764 100%);
+  --main-bg-t: linear-gradient(to bottom, #111827 0%, #3b0764 100%);
+  --main-bg: #111827;
+  --text-color: #ebc0fd;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: var(--main-bg);
+}
