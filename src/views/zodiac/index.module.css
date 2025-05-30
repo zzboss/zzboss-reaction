@@ -1,0 +1,10 @@
+.customRadio {
+  padding: 3px;
+  border: 2px solid var(--border-color);
+}
+.customRadio :global(.ant-radio-button-wrapper::before) {
+  display: none !important;
+}
+.customRadio :global(.ant-radio-button-wrapper) {
+  border: none !important;
+}

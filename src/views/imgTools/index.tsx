@@ -27,7 +27,9 @@ import {
 import { addImage, deleteImageById, findAllImage } from "@/utils/dbUtils";
 import PopImage from "@/views/imgTools/PopImage";
 import { RcFile } from "antd/es/upload/interface";
-const { Sider, Content, Header } = Layout;
+import CardMain from "@/components/CardMain";
+import { defaultImg } from "@/utils/defaultImg";
+const { Sider, Content } = Layout;
 const { Title, Text } = Typography;
 export default function Home() {
   const [fileList, setFileList] = useState<{ url: string; id: number }[]>([]);
@@ -35,19 +37,24 @@ export default function Home() {
   const [orgImgUrl, setOrgImgUrl] = useState<string>("");
   const [mode, setMode] = useState(0);
   const [thresholdValue, setThresholdValue] = useState(30);
-  useEffect(() => {
-    initImageList();
-  }, []);
   // 初始化图片列表, 设置默认图片
   const initImageList = async () => {
     const imgList = await findAllImage();
     if (imgList && imgList.length) {
       setFileList([...imgList]);
-      const { url } = imgList[0];
-      setOrgImgUrl(url);
-      transForm(url);
+    } else {
+      const id = await addImage(defaultImg);
+      setFileList([{ id, url: defaultImg }]);
     }
+    const { url } = imgList[0];
+    setOrgImgUrl(url);
+    setCurImgUrl(url);
+    transForm(url);
   };
+
+  useEffect(() => {
+    initImageList();
+  }, []);
   // 删除图片
   const del = (id: number) => {
     let img;
@@ -60,7 +67,10 @@ export default function Home() {
     if (orgImgUrl === img) {
       const url = fileList.length > 1 ? fileList[1].url : "";
       setOrgImgUrl(url);
-      transForm(url);
+      setCurImgUrl(url);
+      if (url) {
+        transForm(url);
+      }
     }
     setFileList([...list]);
     deleteImageById(id);
@@ -88,6 +98,12 @@ export default function Home() {
     });
   };
   // 通过 onBeforeUpload 拦截图片上传, 做本地图片预览
+  /**
+   * Handles file upload before it's sent to the server.
+   * Reads the file as data URL, adds it to the image list, and sets it as current/original image.
+   * @param file - The file to be uploaded
+   * @returns false to prevent default upload behavior
+   */
   const onBeforeUpload: UploadProps["beforeUpload"] = (file: RcFile) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -120,144 +136,140 @@ export default function Home() {
   };
 
   return (
-      <Layout className={styles.container}>
-        <Header className={styles.header}>
-          <Title className={styles.title} level={3}>
-            <FileJpgOutlined /> 图片处理
-          </Title>
-          <Title level={5} style={{ marginTop: 5 }}>
-            上传图片转换为不同风格
-          </Title>
-        </Header>
-        <Layout>
-          <Sider width={280} className={styles.sider}>
-            <Flex
-              gap={5}
-              justify="space-evenly"
-              style={{
-                position: "sticky",
-                top: 0,
-                padding: "10px 0",
-                zIndex: 1,
-                background: "#111827",
-              }}
-            >
-              <ImgCrop rotationSlider aspectSlider showReset>
-                <Upload showUploadList={false} beforeUpload={onBeforeUpload}>
-                  <Button type="primary">
-                    <UploadOutlined /> 图片加载
-                  </Button>
-                </Upload>
-              </ImgCrop>
-              <Button type="primary" onClick={loadRandomImg}>
-                <ImportOutlined /> 随机图片
+    <CardMain
+      icon={<FileJpgOutlined />}
+      title="图片处理"
+      desc="上传图片转换为不同风格"
+    >
+      <Sider width={280} className={styles.sider}>
+        <Flex
+          gap={5}
+          justify="space-evenly"
+          style={{
+            position: "sticky",
+            top: 0,
+            padding: "10px 0",
+            zIndex: 1,
+            background: "#111827",
+          }}
+        >
+          <ImgCrop rotationSlider aspectSlider showReset>
+            <Upload showUploadList={false} beforeUpload={onBeforeUpload}>
+              <Button type="primary">
+                <UploadOutlined /> 图片加载
               </Button>
-            </Flex>
-            <Content className={styles.imgContainer}>
-              {fileList.map((v) => (
-                <PopImage
-                  key={v.id}
-                  del={() => del(v.id)}
-                  load={() => load(v.url)}
-                  imgProps={{
-                    src: v.url,
-                    preview: false,
-                    width: 75,
-                    height: 75,
-                    className: styles.img,
+            </Upload>
+          </ImgCrop>
+          <Button type="primary" onClick={loadRandomImg}>
+            <ImportOutlined /> 随机图片
+          </Button>
+        </Flex>
+        <Content className={styles.imgContainer}>
+          {fileList.map((v) => (
+            <PopImage
+              key={v.id}
+              del={() => del(v.id)}
+              load={() => load(v.url)}
+              imgProps={{
+                src: v.url,
+                preview: false,
+                width: 75,
+                height: 75,
+                className: styles.img,
+              }}
+            />
+          ))}
+        </Content>
+      </Sider>
+      <Content className={styles.displayContainer}>
+        <Flex justify="space-evenly" align="center" style={{ height: "100%" }}>
+          <Flex vertical className={styles.mainImgContainer}>
+            <Title level={4} className={styles.imgTitle}>
+              原图
+            </Title>
+            {orgImgUrl ? (
+              <Image
+                className={styles.mainImg}
+                width="26.5vw"
+                height="25vh"
+                src={orgImgUrl}
+              />
+            ) : (
+              <Empty className={styles.empty} />
+            )}
+            <Content
+              style={{ width: "20vw", marginLeft: "2rem", marginTop: "1rem" }}
+            >
+              <Space>
+                <Text className={styles.label}>转换模式</Text>
+                <Select
+                  style={{
+                    width: "15vw",
+                    letterSpacing: 0,
+                    color: "white",
                   }}
+                  options={selectOptions}
+                  onChange={setMode}
+                  value={mode}
                 />
-              ))}
+              </Space>
+              <Space style={{ marginTop: "1rem" }}>
+                <Button type="primary" onClick={() => transForm(orgImgUrl)}>
+                  <FileJpgOutlined />
+                  开始转换
+                </Button>
+                <Button type="primary" onClick={() => download(orgImgUrl)}>
+                  <DownloadOutlined />
+                  保存图片
+                </Button>
+              </Space>
             </Content>
-          </Sider>
-          <Content className={styles.displayContainer}>
-            <Flex justify="space-evenly" style={{ height: "90%" }}>
-              <Flex vertical className={styles.mainImgContainer}>
-                <Title level={4} className={styles.imgTitle}>
-                  原图
-                </Title>
-                {orgImgUrl ? (
-                  <Image
-                    className={styles.mainImg}
-                    width="26.5vw"
-                    height="25vh"
-                    src={orgImgUrl}
-                  />
-                ) : (
-                  <Empty className={styles.empty} />
-                )}
-                <main style={{ width: "20vw", marginLeft: "2rem", marginTop: '1rem' }}>
-                  <Space>
-                    <Text className={styles.label}>转换模式</Text>
-                    <Select
-                      style={{
-                        width: "15vw",
-                        letterSpacing: 0,
-                        color: "white",
-                      }}
-                      options={selectOptions}
-                      onChange={setMode}
-                      value={mode}
-                    />
-                  </Space>
-                  <Space style={{ marginTop: '1rem' }}>
-                    <Button type="primary" onClick={() => transForm(orgImgUrl)}>
-                      <FileJpgOutlined />
-                      开始转换
-                    </Button>
-                    <Button type="primary" onClick={() => download(orgImgUrl)}>
-                      <DownloadOutlined />
-                      保存图片
-                    </Button>
-                  </Space>
-                </main>
-              </Flex>
-              <Flex vertical className={styles.mainImgContainer}>
-                <Title level={4} className={styles.imgTitle}>
-                  {selectOptions[mode].label}
-                </Title>
-                {curImgUrl ? (
-                  <Image
-                    className={styles.mainImg}
-                    width="26.5vw"
-                    height="25vh"
-                    src={curImgUrl}
-                  />
-                ) : (
-                  <Empty className={styles.empty} />
-                )}
-                <main style={{ width: "20vw", marginLeft: "2rem" }}>
-                  <Space style={{ marginTop: 10 }}>
-                    <Text className={styles.label}>处理阈值</Text>
-                    <Slider
-                      value={thresholdValue}
-                      style={{ width: "10vw" }}
-                      onChange={(val) => setThresholdValue(val)}
-                      {...thresholdProps}
-                    />
-                    <InputNumber
-                      onChange={(val) => setThresholdValue(val || 1)}
-                      value={thresholdValue}
-                      {...thresholdProps}
-                      precision={0}
-                      style={{ width: "4vw" }}
-                    />
-                  </Space>
-                  <Space style={{ marginTop: 10 }}>
-                    <Button type="primary" onClick={() => transForm(orgImgUrl)}>
-                      <FileJpgOutlined />
-                      开始转换
-                    </Button>
-                    <Button type="primary" onClick={() => download(curImgUrl)}>
-                      <DownloadOutlined />
-                      保存图片
-                    </Button>
-                  </Space>
-                </main>
-              </Flex>
-            </Flex>
-          </Content>
-        </Layout>
-      </Layout>
+          </Flex>
+          <Flex vertical className={styles.mainImgContainer}>
+            <Title level={4} className={styles.imgTitle}>
+              {selectOptions[mode].label}
+            </Title>
+            {curImgUrl ? (
+              <Image
+                className={styles.mainImg}
+                width="26.5vw"
+                height="25vh"
+                src={curImgUrl}
+              />
+            ) : (
+              <Empty className={styles.empty} />
+            )}
+            <Content style={{ width: "20vw", marginLeft: "2rem" }}>
+              <Space style={{ marginTop: 10 }}>
+                <Text className={styles.label}>处理阈值</Text>
+                <Slider
+                  value={thresholdValue}
+                  style={{ width: "10vw" }}
+                  onChange={(val) => setThresholdValue(val)}
+                  {...thresholdProps}
+                />
+                <InputNumber
+                  onChange={(val) => setThresholdValue(val || 1)}
+                  value={thresholdValue}
+                  {...thresholdProps}
+                  precision={0}
+                  style={{ width: "4vw" }}
+                />
+              </Space>
+              <Space style={{ marginTop: 10 }}>
+                <Button type="primary" onClick={() => transForm(orgImgUrl)}>
+                  <FileJpgOutlined />
+                  开始转换
+                </Button>
+                <Button type="primary" onClick={() => download(curImgUrl)}>
+                  <DownloadOutlined />
+                  保存图片
+                </Button>
+              </Space>
+            </Content>
+          </Flex>
+        </Flex>
+      </Content>
+    </CardMain>
   );
 }

@@ -1,0 +1,27 @@
+.sider {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #760fc6 var(--main-bg);
+}
+
+.zodiacButton {
+  width: 7.5rem;
+  height: 4.5rem;
+}
+.content {
+  margin: 1rem 2rem 1rem 2rem;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: linear-gradient(45deg, #111827 0%, #3b0764 100%);
+}
+.header {
+  height: 5rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.title {
+  margin-bottom: 0 !important;
+  color: #281341;
+}

@@ -1,70 +1,68 @@
-import { NavLink, Outlet } from "react-router";
-import { MenuItemType } from "antd/es/menu/interface";
+import { Outlet, useNavigate } from "react-router";
 import {
   FileImageOutlined,
   HourglassOutlined,
   FireOutlined,
 } from "@ant-design/icons";
-import { Menu, Layout, Typography, Col, Row } from "antd";
+import { Layout, Typography, Flex, Radio, RadioChangeEvent } from "antd";
 import styles from "./app.module.css";
+import { useState } from "react";
 const { Header, Content } = Layout;
 const { Title } = Typography;
 function App() {
-  const menuItems: MenuItemType[] = [
+  const [activeMenu, setActiveMode] = useState("pictools");
+  const navigete = useNavigate(); 
+  const changeMenu = (path: string) => {
+    setActiveMode(path);
+    navigete(path)
+  }
+  const menuItems = [
     {
-      key: "img-tool",
-      icon: <FileImageOutlined />,
-      label: <NavLink to="/pictools">图片工具</NavLink>,
+      value: "pictools",
+      label: <Typography.Text><FileImageOutlined /> 图片工具</Typography.Text>,
     },
     {
-      key: "history-today",
-      icon: <HourglassOutlined />,
-      label: <NavLink to="/history">历史上的今天</NavLink>,
+      value: "history",
+      label:<Typography.Text><HourglassOutlined /> 历史上的今天</Typography.Text>,
     },
     {
-      key: "stars",
-      icon: <FireOutlined />,
-      label: <NavLink to="/stars">星座运势</NavLink>,
+      value: "stars",
+      label: <Typography.Text><FireOutlined /> 星座运势</Typography.Text>,
     },
   ];
   return (
     <>
       <Header className={styles.header}>
-        <Row align="middle" style={{ height: "100%" }}>
-          <Col offset={1} span={4} style={{ height: "100%" }}>
-            <Title className={styles.title} level={3}>
-              <span
-                style={{
-                  backgroundImage:
-                    "linear-gradient(to right, #f9a8d4, #c084fc)",
-                  backgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                兔子会上树
-              </span>
-              <span
-                style={{
-                  backgroundImage:
-                    "linear-gradient(to right, #2dd4bf, #93c5fd)",
-                  backgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                的工具站
-              </span>
-            </Title>
-          </Col>
-          <Col offset={2}>
-            <Menu
-              theme="dark"
-              className={styles.menu}
-              defaultSelectedKeys={["img-tool"]}
-              items={menuItems}
-              mode="horizontal"
-            ></Menu>
-          </Col>
-        </Row>
+        <Flex align="center" justify="space-between">
+          <Title className={styles.title} level={3}>
+            <span
+              style={{
+                backgroundImage: "linear-gradient(to right, #f9a8d4, #c084fc)",
+                backgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              兔子会上树
+            </span>
+            <span
+              style={{
+                backgroundImage: "linear-gradient(to right, #2dd4bf, #93c5fd)",
+                backgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              的工具站
+            </span>
+          </Title>
+          <Radio.Group
+            className={styles.customRadio}
+            options={menuItems}
+            optionType="button"
+            onChange={(e: RadioChangeEvent) => changeMenu(e.target.value)}
+            value={activeMenu}
+            buttonStyle="solid"
+          />
+        </Flex>
       </Header>
       <Content className={styles.main}>
         <Outlet />

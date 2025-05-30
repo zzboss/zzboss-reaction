@@ -1,11 +1,15 @@
 /* global.css */
 :root {
-  --boder-color: #352148;
-  --boder-w: 1px;
+  --border-color: #352148;
+  --border-w: 1px;
   --header-bg: linear-gradient(45deg, #111827 0%, #3b0764 100%);
   --main-bg-t: linear-gradient(to bottom, #111827 0%, #3b0764 100%);
   --main-bg: #111827;
   --text-color: #ebc0fd;
+  --fire: linear-gradient(to right bottom, #ef4444  0%, #ff9966 100%);
+  --water: linear-gradient(to right bottom, #6366f1   0%, #a855f7  100%);
+  --air: linear-gradient(to right bottom, #3b82f6    0%, #06b6d4   100%);
+  --earth: linear-gradient(to right bottom, #16a34a    0%, #10b981   100%);
 }
 * {
   margin: 0;
@@ -14,3 +18,8 @@
 body {
   background-color: var(--main-bg);
 }
+.border {
+  border: var(--border-w) solid var(--border-color);
+  border-radius: 5px;
+}
+

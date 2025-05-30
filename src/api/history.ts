@@ -1,6 +1,6 @@
-type HistoryResult = {
+type HistoryResult<T> = {
   code: number,
-  data: Array<HistoryInfo>
+  data: T
 }
 
 type HistoryInfo = {
@@ -10,12 +10,26 @@ type HistoryInfo = {
   eventYear: string
 }
 
-const url = 'http://localhost:8080/open/history/today'
-const listHistory = (): Promise<HistoryResult> => {
-  return fetch(url).then(res => res.json())
+type HistoryDetail = {
+  id: string,
+  title: string,
+  content: string,
+  picNo: number,
+  picUrls: string[],
+}
+
+const url = 'http://localhost:8080/open/history'
+
+const listHistory = (): Promise<HistoryResult<HistoryInfo[]>> => {
+  return fetch(`${url}/today`).then(res => res.json())
+} 
+const getHistoryDetail = (id: string): Promise<HistoryResult<HistoryDetail>> => {
+  return fetch(`${url}/detail/${id}`).then(res => res.json())
 } 
 
 export {
   listHistory,
-  type HistoryInfo
+  getHistoryDetail,
+  type HistoryInfo,
+  type HistoryDetail
 }

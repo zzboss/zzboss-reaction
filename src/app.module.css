@@ -1,20 +1,30 @@
 .header {
-  padding: 1rem 10rem;
-  height: 64px;
+  padding: 1rem 10rem 0 10rem;
   background-image: var(--header-bg);
-  border-bottom: var(--boder-w) solid var(--boder-color);
+  border-bottom: var(--border-w) solid var(--border-color);
 }
 .title {
-  margin: 0;
   height: 100%;
   display: flex;
   align-items: center;
+  margin: 0 !important;
 }
 .menu {
   margin-left: 3rem;
   border-radius: 10px;
-  background-color: #4A0C7B;
+  background-color: #4a0c7b;
 }
 .main {
-  padding: 2rem 10rem;
+  margin: 1rem 10%;
+}
+
+.customRadio {
+  padding: 3px;
+  border: 2px solid var(--border-color);
+}
+.customRadio :global(.ant-radio-button-wrapper::before) {
+  display: none !important;
+}
+.customRadio :global(.ant-radio-button-wrapper) {
+  border: none !important;
 }
