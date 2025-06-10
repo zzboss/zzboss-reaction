@@ -1,3 +1,4 @@
+import { ZoidacName } from "@/views/zodiac/types/ZodiacType";
 import { Result } from "./common";
 
 const url = 'http://localhost:8080/open/zodiac'
@@ -47,6 +48,18 @@ type ZodiacYearFortuneType = {
   finance: string; // 财运运势
 }
 
+// 星座配对
+type ZodiacCompatibilityType = {
+  men: string; // 男方星座
+  women: string; // 女方星座
+  zhishu: string; // 综合指数
+  bizhong: string; // 比重
+  xiangyue: string; // 相悦指数
+  tcdj: string; // 天长地久指数
+  jieguo: string; // 结果
+  lianai: string; // 恋爱
+  zhuyi: string; // 注意事项
+};
 
 // 获取星座日运势
 const getDayForturn = (consName: string, type: 'today' | 'tomorrow'): Promise<Result<ZodiacDayFortuneType>> => {
@@ -68,8 +81,13 @@ const getYearForturn = (consName: string): Promise<Result<ZodiacWeekFortuneType>
   return fetch(`${url}/year?consName=${consName}`).then(res => res.json())
 }
 
+// 获取星座配对
+const getCompatibility = (men: ZoidacName, women: ZoidacName): Promise<Result<ZodiacCompatibilityType>> =>{
+  return fetch(`${url}/match?men=${men}&women=${women}`).then(res => res.json())
+}
 export { getDayForturn, type ZodiacDayFortuneType, 
   getWeekForturn, type ZodiacWeekFortuneType,
   getMonthForturn, type ZodiacMonthFortuneType,
-  getYearForturn, type ZodiacYearFortuneType
+  getYearForturn, type ZodiacYearFortuneType,
+  getCompatibility, type ZodiacCompatibilityType
 }

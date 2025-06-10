@@ -7,9 +7,17 @@
   --main-bg: #111827;
   --text-color: #ebc0fd;
   --fire: linear-gradient(to right bottom, #ef4444  0%, #ff9966 100%);
+  --fire-primary: #ef4444;
+  --fire-secondary: #ff9966;
   --water: linear-gradient(to right bottom, #6366f1   0%, #a855f7  100%);
-  --air: linear-gradient(to right bottom, #3b82f6    0%, #06b6d4   100%);
+  --water-primary: #6366f1;
+  --water-secondary: #a855f7;
   --earth: linear-gradient(to right bottom, #16a34a    0%, #10b981   100%);
+  --earth-primary: #16a34a;
+  --earth-secondary: #10b981;
+  --air: linear-gradient(to right bottom, #3b82f6    0%, #06b6d4   100%);
+  --air-primary: #3b82f6;
+  --air-secondary: #06b6d4;
 }
 * {
   margin: 0;

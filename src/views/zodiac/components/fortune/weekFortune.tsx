@@ -1,8 +1,8 @@
 import { getWeekForturn, ZodiacWeekFortuneType } from "@/api/zodiac";
 import { Carousel} from "antd";
 import { useEffect, useState } from "react";
-import CardDesc from "./CardDesc";
-import { ZoidacName } from "../types/ZodiacType";
+import CardDesc from "@/views/zodiac/components/CardDesc";
+import { ZoidacName } from "@/views/zodiac/types/ZodiacType";
 
 export default function WeekFortune({ cronName }: { cronName: ZoidacName }) {
   const [info, setInfo] = useState<Partial<ZodiacWeekFortuneType>>({});

@@ -1,6 +1,6 @@
 import { Button, ConfigProvider } from "antd";
-import useStyle from "../styles/cresteStyle";
-import { ZodiacAttr } from "../types/ZodiacType";
+import useStyle from "../../styles/cresteStyle";
+import { ZodiacAttr } from "../../types/ZodiacType";
 import React from "react";
 
 interface ZodiacButtonProps extends React.HTMLAttributes<HTMLButtonElement> {

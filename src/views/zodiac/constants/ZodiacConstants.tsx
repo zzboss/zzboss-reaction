@@ -3,6 +3,7 @@ import { ZodiacAttr, ZodiacInfo, ZoidacName } from "../types/ZodiacType"
 const ZODIACS_INFO: ZodiacInfo[] = [
   {
     name: ZoidacName.aries,
+    code: 0, // 星座标识, 与索引一致
     birthday: "3.21 - 4.19",
     attr: ZodiacAttr.fire,
     element: '火相星座',
@@ -12,6 +13,7 @@ const ZODIACS_INFO: ZodiacInfo[] = [
   },
   {
     name: ZoidacName.taurus,
+    code: 1,
     birthday: "4.20 - 5.20",
     attr: ZodiacAttr.earth,
     element: '土相星座',
@@ -21,6 +23,7 @@ const ZODIACS_INFO: ZodiacInfo[] = [
     },
     {
     name: ZoidacName.gemini,
+    code: 2,
     birthday: "5.21 - 6.21",
     attr: ZodiacAttr.air,
     element: '风相星座',
@@ -30,6 +33,7 @@ const ZODIACS_INFO: ZodiacInfo[] = [
   },
   {
     name: ZoidacName.cancer,
+    code: 3,
     birthday: "6.22 - 7.22",
     attr: ZodiacAttr.water,
     element: '水相星座',
@@ -39,6 +43,7 @@ const ZODIACS_INFO: ZodiacInfo[] = [
   },
   {
     name: ZoidacName.leo,
+    code: 4,
     birthday: "7.23 - 8.22",
     attr: ZodiacAttr.fire,
     element: '火相星座',
@@ -48,6 +53,7 @@ const ZODIACS_INFO: ZodiacInfo[] = [
   },
   {
     name: ZoidacName.virgo,
+    code: 5,
     birthday: "8.23 - 9.22",
     attr: ZodiacAttr.earth,
     element: '土相星座',
@@ -57,6 +63,7 @@ const ZODIACS_INFO: ZodiacInfo[] = [
   },
   {
     name: ZoidacName.libra,
+    code: 6,
     birthday: "9.23 - 10.23",
     attr: ZodiacAttr.air,
     element:'风相星座',
@@ -66,6 +73,7 @@ const ZODIACS_INFO: ZodiacInfo[] = [
   },
   {
     name: ZoidacName.scorpio,
+    code: 7,
     birthday: "10.24 - 11.22",
     attr: ZodiacAttr.water,
     element: '水相星座',
@@ -75,6 +83,7 @@ const ZODIACS_INFO: ZodiacInfo[] = [
   },
   {
     name: ZoidacName.sagittarius,
+    code: 8,
     birthday: "11.23 - 12.21",
     attr: ZodiacAttr.fire,
     element: '火相星座',
@@ -84,6 +93,7 @@ const ZODIACS_INFO: ZodiacInfo[] = [
   },
   {
     name: ZoidacName.capricorn,
+    code: 9,
     birthday: "12.22 - 1.19",
     attr: ZodiacAttr.earth,
     element: '土相星座',
@@ -93,6 +103,7 @@ const ZODIACS_INFO: ZodiacInfo[] = [
   },
   {
     name: ZoidacName.aquarius,
+    code: 10,
     birthday: "1.20 - 2.18",
     attr: ZodiacAttr.air,
     element: '风相星座',
@@ -102,6 +113,7 @@ const ZODIACS_INFO: ZodiacInfo[] = [
   },
   {
     name: ZoidacName.pisces,
+    code: 11,
     birthday: "2.19 - 3.20",
     attr: ZodiacAttr.water,
     element: '水相星座',

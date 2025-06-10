@@ -1,0 +1,24 @@
+.container {
+  width: 100%;
+  padding: 1rem;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.attrContainer {
+  width: 100%;
+  padding: 2rem 0;
+}
+.fire {
+  color: var(--fire-secondary);
+}
+
+.water {
+  color: var(--water-secondary);
+}
+
+.earth {
+  color: var(--earth-secondary);
+}
+.air {
+  color: var(--air-secondary);
+}

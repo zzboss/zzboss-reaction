@@ -1,8 +1,8 @@
 import { getYearForturn, ZodiacYearFortuneType } from "@/api/zodiac";
-import { ZoidacName } from "../types/ZodiacType";
 import { useEffect, useState } from "react";
 import { Carousel } from "antd";
-import CardDesc from "./CardDesc";
+import CardDesc from "@/views/zodiac/components/CardDesc";
+import { ZoidacName } from "@/views/zodiac/types/ZodiacType";
 
 export default function YearFortune({ cronName }: { cronName: ZoidacName }) {
   const [info, setInfo] = useState<Partial<ZodiacYearFortuneType>>({});

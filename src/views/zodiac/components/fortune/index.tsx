@@ -5,9 +5,9 @@ import YearFortune from "./yearFortune";
 import { useEffect, useState } from "react";
 import { Flex, Layout, Space, Typography } from "antd";
 import ZodiacButton from "./ZodiacButton";
-import { ZODIACS_INFO } from "../constants/ZodiacConstants";
-import styles from "../styles/fortune.module.css";
-import { ZodiacInfo } from "../types/ZodiacType";
+import { ZODIACS_INFO } from "../../constants/ZodiacConstants";
+import styles from "../../styles/fortune.module.css";
+import { ZodiacInfo } from "../../types/ZodiacType";
 import { BellOutlined, CalendarOutlined, FireOutlined, MoonOutlined, SunOutlined } from "@ant-design/icons";
 const { Header, Content, Sider } = Layout;
 export default function Fortune() {

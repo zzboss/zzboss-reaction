@@ -1,5 +1,6 @@
 type ZodiacInfo = {
   name: ZoidacName,
+  code: number, // 星座标识, 与索引一致
   birthday: string,
   attr: ZodiacAttr,
   element: string,

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Radio, RadioChangeEvent, Layout, Typography } from "antd";
 import CardMain from "@/components/CardMain";
 import styles from "./index.module.css";
@@ -8,13 +8,8 @@ import {
   InfoCircleOutlined,
   MoonOutlined,
 } from "@ant-design/icons";
-import {
-  getDayForturn,
-  getMonthForturn,
-  getWeekForturn,
-  getYearForturn,
-} from "@/api/zodiac";
 import Fortune from "./components/fortune";
+import Compatibility from "./components/compatibility";
 const { Header, Content } = Layout;
 export default function Stars() {
   const [activeMode, setActiveMode] = useState("fortune");
@@ -35,23 +30,15 @@ export default function Stars() {
       ),
       value: "compatibility",
     },
-    {
-      label: (
-        <Typography.Text>
-          <InfoCircleOutlined /> 星座资料
-        </Typography.Text>
-      ),
-      value: "info",
-    },
+    // {
+    //   label: (
+    //     <Typography.Text>
+    //       <InfoCircleOutlined /> 星座资料
+    //     </Typography.Text>
+    //   ),
+    //   value: "info",
+    // },
   ];
-  useEffect(() => {
-    // getMonthForturn("白羊座").then((res) => {
-    //   console.log("month", res);
-    // });
-    // getYearForturn("白羊座").then((res) => {
-    //   console.log("year", res);
-    // });
-  }, []);
   return (
     <CardMain
       title="星座运势"
@@ -68,11 +55,11 @@ export default function Stars() {
           buttonStyle="solid"
         />
       </Header>
-      <Content style={{marginTop: 5}}>
+      <Content style={{marginTop: 5, height: "100%"}}>
         {activeMode === "fortune" ? (
           <Fortune />
         ) : activeMode === "compatibility" ? (
-          "compatibility"
+          <Compatibility />
         ) : (
           "info"
         )}

@@ -55,7 +55,7 @@ export default class IndexedDBWrapper {
     })
   }
   async getStore(tableName: string, mode: IDBTransactionMode = 'readonly') {
-      let db = this.db || (await this.open())
+      const db = this.db || (await this.open())
       const transaction = db.transaction(tableName, mode)
       return transaction.objectStore(tableName)
   }

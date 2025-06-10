@@ -5,6 +5,7 @@ import ImageTools from "@/views/imgTools";
 import History from "@/views/history";
 import Zodiac from "./zodiac";
 
+
 export default function Root() {
   return useRoutes([
     {
