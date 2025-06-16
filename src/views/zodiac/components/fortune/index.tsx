@@ -58,7 +58,7 @@ export default function Fortune() {
   }, [activeZodiac.name, activeMode]);
   return (
     <Layout style={{ height: "100%" }}>
-      <Sider width={300} className={styles.sider} style={{height: 'calc(100% - 64px)'}}>
+      <Sider width={320} className={styles.sider}>
         <Flex gap={10} wrap justify="space-around">
           {ZODIACS_INFO.map((zodiac) => {
             return (
@@ -109,7 +109,7 @@ export default function Fortune() {
          <Space size="small" style={{marginTop: 10}}>
            {
             fortuneOptions.map((option, index) => (
-              <ZodiacButton attr={activeZodiac.attr} active={activeMode === index} toActive={() => setActiveMode(index)}>
+              <ZodiacButton key={option.label} attr={activeZodiac.attr} active={activeMode === index} toActive={() => setActiveMode(index)}>
                 {option.icon} {option.label}
               </ZodiacButton>
             ))

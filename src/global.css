@@ -18,16 +18,53 @@
   --air: linear-gradient(to right bottom, #3b82f6    0%, #06b6d4   100%);
   --air-primary: #3b82f6;
   --air-secondary: #06b6d4;
+
 }
+/* 4K 专用字体 */
+@media (min-width: 2100px) {
+  :root {
+    --ant-font-size-base: 20px;
+    --ant-btn-font-size: 18px;
+    --ant-input-font-size: 16px;
+
+  }
+}
+
+/* 覆盖 Ant Design 组件字体 */
+.ant-btn {
+  font-size: var(--ant-btn-font-size) !important;
+}
+
+.ant-input {
+  font-size: var(--ant-input-font-size) !important;
+}
+
+.ant-select-selection-item {
+  font-size: var(--ant-font-size-base) !important;
+}
+
 * {
   margin: 0;
   padding: 0;
 }
 body {
   background-color: var(--main-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+html::-webkit-scrollbar {
+  display: none;
 }
 .border {
   border: var(--border-w) solid var(--border-color);
   border-radius: 5px;
 }
+
+
+
 

@@ -1,7 +1,8 @@
 import { ZoidacName } from "@/views/zodiac/types/ZodiacType";
 import { Result } from "./common";
 
-const url = 'http://localhost:8080/open/zodiac'
+// const url = 'http://localhost:8080/open/zodiac'
+const url = 'http://8.138.245.32/api/open/zodiac'
 
 type ZodiacDayFortuneType = {
   date: string; // 日期，格式为 YYYYMMDD

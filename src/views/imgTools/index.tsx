@@ -5,7 +5,6 @@ import {
   UploadOutlined,
 } from "@ant-design/icons";
 import ImgCrop from "antd-img-crop";
-import "@ant-design/v5-patch-for-react-19";
 import { useEffect, useState } from "react";
 import { MAX_THRESHOLD, transformImg, urlToBase64 } from "@/utils/imgUtils";
 import { randomImgG } from "@/api/randomImg";
@@ -23,12 +22,13 @@ import {
   Typography,
   Flex,
   Space,
+  Col,
+  Row,
 } from "antd";
 import { addImage, deleteImageById, findAllImage } from "@/utils/dbUtils";
 import PopImage from "@/views/imgTools/PopImage";
 import { RcFile } from "antd/es/upload/interface";
 import CardMain from "@/components/CardMain";
-import { defaultImg } from "@/utils/defaultImg";
 const { Sider, Content } = Layout;
 const { Title, Text } = Typography;
 export default function Home() {
@@ -42,14 +42,13 @@ export default function Home() {
     const imgList = await findAllImage();
     if (imgList && imgList.length) {
       setFileList([...imgList]);
+      const { url } = imgList[0];
+      setOrgImgUrl(url);
+      setCurImgUrl(url);
+      transForm(url);
     } else {
-      const id = await addImage(defaultImg);
-      setFileList([{ id, url: defaultImg }]);
+      loadRandomImg();
     }
-    const { url } = imgList[0];
-    setOrgImgUrl(url);
-    setCurImgUrl(url);
-    transForm(url);
   };
 
   useEffect(() => {
@@ -135,54 +134,81 @@ export default function Home() {
     a.click();
   };
 
+  function renderImgList() {
+    // 通过 Row + Col 设置为一行两个
+    const targetArr = [];
+    const cols = 3;
+    const sp = Math.floor(24 / cols);
+    for (let i = 0; i < fileList.length; i += cols) {
+      const row = new Array(cols).fill(0);
+      for (let j = 0; j < cols; j++) {
+        const target = fileList[i + j] || null;
+        row[j] = target ? (
+          <Col key={target.id} span={sp}>
+            <PopImage
+              del={() => del(target.id)}
+              load={() => load(target.url)}
+              imgProps={{
+                src: target.url,
+                preview: false,
+                width: '100%',
+                className: styles.img,
+              }}
+            />
+          </Col>
+        ) : (
+          <Col key={'empty'} span={sp}></Col>
+        );
+      }
+      targetArr.push(
+        <Row
+          className={styles.imgRow}
+          gutter={10}
+          justify={"space-evenly"}
+          key={"row" + i}
+        >
+          {row}
+        </Row>
+      );
+    }
+    return targetArr;
+  }
+
   return (
     <CardMain
       icon={<FileJpgOutlined />}
       title="图片处理"
       desc="上传图片转换为不同风格"
     >
-      <Sider width={280} className={styles.sider}>
+      <Sider width={400} className={styles.sider}>
         <Flex
           gap={5}
           justify="space-evenly"
           style={{
             position: "sticky",
             top: 0,
-            padding: "10px 0",
             zIndex: 1,
+            padding: "10px",
             background: "#111827",
           }}
         >
           <ImgCrop rotationSlider aspectSlider showReset>
             <Upload showUploadList={false} beforeUpload={onBeforeUpload}>
-              <Button type="primary">
+              <Button type="primary" size="large">
                 <UploadOutlined /> 图片加载
               </Button>
             </Upload>
           </ImgCrop>
-          <Button type="primary" onClick={loadRandomImg}>
+          <Button type="primary" size="large" onClick={loadRandomImg}>
             <ImportOutlined /> 随机图片
           </Button>
         </Flex>
         <Content className={styles.imgContainer}>
-          {fileList.map((v) => (
-            <PopImage
-              key={v.id}
-              del={() => del(v.id)}
-              load={() => load(v.url)}
-              imgProps={{
-                src: v.url,
-                preview: false,
-                width: 75,
-                height: 75,
-                className: styles.img,
-              }}
-            />
-          ))}
+          {renderImgList()}
         </Content>
       </Sider>
       <Content className={styles.displayContainer}>
-        <Flex justify="space-evenly" align="center" style={{ height: "100%" }}>
+        <Flex justify="space-evenly" style={{ height: "100%", minWidth: '60vw', marginTop: '10vh' }}>
           <Flex vertical className={styles.mainImgContainer}>
             <Title level={4} className={styles.imgTitle}>
               原图
@@ -190,7 +216,7 @@ export default function Home() {
             {orgImgUrl ? (
               <Image
                 className={styles.mainImg}
-                width="26.5vw"
+                width="20vw"
                 height="25vh"
                 src={orgImgUrl}
               />
@@ -232,7 +258,7 @@ export default function Home() {
             {curImgUrl ? (
               <Image
                 className={styles.mainImg}
-                width="26.5vw"
+                width="20vw"
                 height="25vh"
                 src={curImgUrl}
               />

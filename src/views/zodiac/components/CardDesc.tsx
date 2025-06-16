@@ -15,7 +15,7 @@ export default function CardDesc({
   desc = "",
   cronName,
   width = "60%",
-  height = "8rem",
+  height = "10rem",
 }: CardDescProps) {
   const [primaryColor, setPrimaryColor] = useState<ZodiacAttr>(ZodiacAttr.fire);
   useEffect(() => {

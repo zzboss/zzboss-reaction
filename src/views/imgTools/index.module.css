@@ -1,18 +1,21 @@
 .sider {
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #760fc6 var(--main-bg);
+  max-height: 75vh;
 }
 .imgContainer {
-  padding: 10px;
-  margin-top: 10px;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  scrollbar-color: #760fc6 var(--main-bg);
+  overflow-y: auto;
+  max-height: calc(100% - 100px);
+  scrollbar-width: thin;
+  padding: 0 10px;
 }
+.imgRow {
+  margin-top: 10px;
+}
+
 .img {
   border-radius: 5px;
   object-fit: cover;
+  aspect-ratio: 1/1;
 }
 .displayContainer {
   background-image: var(--main-bg-t);

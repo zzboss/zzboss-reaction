@@ -5,7 +5,6 @@ import styles from "./index.module.css";
 import {
   FireOutlined,
   HeartOutlined,
-  InfoCircleOutlined,
   MoonOutlined,
 } from "@ant-design/icons";
 import Fortune from "./components/fortune";

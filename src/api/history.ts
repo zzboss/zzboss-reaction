@@ -18,7 +18,8 @@ type HistoryDetail = {
   picUrls: string[],
 }
 
-const url = 'http://localhost:8080/open/history'
+// const url = 'http://localhost:8080/open/history'
+const url = 'http://8.138.245.32/api/open/history'
 
 const listHistory = (): Promise<HistoryResult<HistoryInfo[]>> => {
   return fetch(`${url}/today`).then(res => res.json())
