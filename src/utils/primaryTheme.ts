@@ -1,9 +1,14 @@
 import { theme, ThemeConfig } from "antd";
-const primaryTheme: ThemeConfig = {
+const createPrimaryTheme = (): ThemeConfig => {
+
+
+  return {
+  cssVar: true,
+  hashed: false,
   algorithm: theme.darkAlgorithm,
   token: {
-    fontSize: document.documentElement.clientWidth > 1900 ? 20:14,
-    // fontSize: 14,
+    fontSize: 14,
+    fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
   },
   components: {
     Layout: {
@@ -16,7 +21,10 @@ const primaryTheme: ThemeConfig = {
       buttonSolidCheckedBg: "#6717a6",
       buttonSolidCheckedHoverBg: "#8e2cd9",
       borderRadius: 0,
+    },
+    Typography: {
+      titleMarginBottom: 0
     }
-  },
+  },}
 };
-export default primaryTheme;
+export default createPrimaryTheme;

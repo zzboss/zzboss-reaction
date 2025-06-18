@@ -1,9 +1,9 @@
 import { useRoutes, Navigate } from "react-router";
 import { KeepAlive } from "react-activation";
-import App from "../App";
+import App from "./App";
 import ImageTools from "@/views/imgTools";
 import History from "@/views/history";
-import Zodiac from "./zodiac";
+import Zodiac from "@/views/zodiac";
 
 export default function Root() {
   return useRoutes([
@@ -32,9 +32,9 @@ export default function Root() {
           ),
         },
         {
-          path: "stars",
+          path: "zodiac",
           element: (
-            <KeepAlive name="stars" cacheKey="stars">
+            <KeepAlive name="zodiac" cacheKey="zodiac">
               <Zodiac />
             </KeepAlive>
           ),

@@ -138,7 +138,7 @@ export default function Home() {
     // 通过 Row + Col 设置为一行两个
     const targetArr = [];
     const cols = 3;
-    const sp = Math.floor(24 / cols);
+    const sp = 7;
     for (let i = 0; i < fileList.length; i += cols) {
       const row = new Array(cols).fill(0);
       for (let j = 0; j < cols; j++) {
@@ -157,7 +157,7 @@ export default function Home() {
             />
           </Col>
         ) : (
-          <Col key={'empty'} span={sp}></Col>
+          <Col key={'empty' + i + '-' + j} span={sp}></Col>
         );
       }
       targetArr.push(
@@ -208,7 +208,7 @@ export default function Home() {
         </Content>
       </Sider>
       <Content className={styles.displayContainer}>
-        <Flex justify="space-evenly" style={{ height: "100%", minWidth: '60vw', marginTop: '10vh' }}>
+        <Flex justify="space-evenly" align="center" style={{ height: "100%", minWidth: '60vw' }}>
           <Flex vertical className={styles.mainImgContainer}>
             <Title level={4} className={styles.imgTitle}>
               原图

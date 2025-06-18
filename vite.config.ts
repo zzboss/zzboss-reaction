@@ -2,11 +2,9 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import {resolve} from 'path'
 import viteCompression from 'vite-plugin-compression'
+import autoprefixer from 'autoprefixer';
 
-
-// https://vite.dev/config/
 export default defineConfig({
-  base: './', // 添加这一行
   server: {
     host: '0.0.0.0',
   },
@@ -28,7 +26,6 @@ export default defineConfig({
       output: {
         manualChunks: (id) => {
           if (id.includes('node_modules/')) {
-            // const lib = id.toString().split('node_modules/')[1].split('/')[0].toString();
             return 'vendor';
           }
         }
@@ -39,6 +36,19 @@ export default defineConfig({
         keep_infinity: true,
         drop_console: true,
       },
+    }
+  },
+  css: {
+    postcss: {
+      // 引入 autoprefixer
+      plugins: [autoprefixer()]
+    },
+    preprocessorOptions: {
+      less: {
+        // 可选：配置LESS全局变量
+        additionalData: `@import "@/styles/variables.less";`,
+        javascriptEnabled: true,
+      }
     }
   }
 })

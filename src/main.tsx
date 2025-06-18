@@ -3,14 +3,13 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router";
 import Root from "./views/Root.tsx";
 import { AliveScope } from "react-activation";
-import { ConfigProvider } from "antd";
-import primaryTheme from "./styles/primaryTheme.ts";
+import EnhancedConfigProvider from "./components/EnhanceConfigProvider.tsx";
 createRoot(document.getElementById("root")!).render(
-  <ConfigProvider theme={primaryTheme}>
+  <EnhancedConfigProvider>
     <BrowserRouter>
       <AliveScope>
         <Root />
       </AliveScope>
     </BrowserRouter>
-  </ConfigProvider>
+  </EnhancedConfigProvider>
 );

@@ -5,7 +5,8 @@ import {
   FireOutlined,
 } from "@ant-design/icons";
 import { Layout, Typography, Flex, Radio, RadioChangeEvent } from "antd";
-import styles from "./app.module.css";
+import styles from "./app.module.less";
+import RadioStyle from '@/styles/Radio.module.less'
 import { useState } from "react";
 const { Header, Content } = Layout;
 const { Title } = Typography;
@@ -26,7 +27,7 @@ function App() {
       label:<Typography.Text><HourglassOutlined /> 历史上的今天</Typography.Text>,
     },
     {
-      value: "stars",
+      value: "zodiac",
       label: <Typography.Text><FireOutlined /> 星座运势</Typography.Text>,
     },
   ];
@@ -55,7 +56,7 @@ function App() {
             </span>
           </Title>
           <Radio.Group
-            className={styles.customRadio}
+            className={RadioStyle.customRadio}
             options={menuItems}
             optionType="button"
             onChange={(e: RadioChangeEvent) => changeMenu(e.target.value)}
