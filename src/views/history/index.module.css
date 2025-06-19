@@ -1,9 +1,12 @@
 .historyList {
   height: 60vh;
   padding: 1rem;
+}
+
+.scroll {
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #760fc6 var(--main-bg);
+  scrollbar-color: #760fc6 var(--bg-primary);
 }
 .h40 {
   max-height: 40vh;
@@ -13,10 +16,7 @@
 }
 .evDetail {
   display: block;
-  overflow-y: auto;
   overflow-x: hidden;
-  scrollbar-width: thin;
-  scrollbar-color: #760fc6 var(--main-bg);
 }
 .imgs {
   width: 95%;

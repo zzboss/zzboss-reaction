@@ -9,6 +9,5 @@ export const getDynamicFontSize = (): number => {
   const screenWidth = Math.min(maxWidth, Math.max(minWidth, window.visualViewport?.width || window.innerWidth)) 
   // 根据百分比计算基础字体大小 (14px到24px平滑过渡)
   const resolutionBasedSize =  (screenWidth - minWidth) / (maxWidth - minWidth) * 10 + baseSize
-  console.log(resolutionBasedSize, screenWidth)
-  return resolutionBasedSize
+  return Math.floor(resolutionBasedSize)
 };

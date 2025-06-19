@@ -3,7 +3,7 @@
   max-height: 75vh;
 }
 .imgContainer {
-  scrollbar-color: #760fc6 var(--main-bg);
+  scrollbar-color: #760fc6 var(--bg-primary);
   overflow-y: auto;
   max-height: calc(100% - 100px);
   scrollbar-width: thin;
@@ -19,7 +19,7 @@
   aspect-ratio: 1/1;
 }
 .displayContainer {
-  background-image: var(--main-bg-t);
+  background: var(--bg-primary);
 }
 .mainImgContainer {
   height: 48vh;
@@ -27,7 +27,7 @@
   padding-bottom: 1rem;
   border-radius: 10px;
   border: var(--border-w) solid var(--border-color);
-  background: var(--main-bg);
+  background: var(--bg-secondary);
 }
 .imgTitle {
   padding: 0.5rem 1rem;

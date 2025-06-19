@@ -1,12 +1,8 @@
 import { useState } from "react";
 import { Radio, RadioChangeEvent, Layout, Typography } from "antd";
 import CardMain from "@/components/CardMain";
-import styles from "./index.module.css";
-import {
-  FireOutlined,
-  HeartOutlined,
-  MoonOutlined,
-} from "@ant-design/icons";
+import RadioStyle from "@/styles/Radio.module.less";
+import { FireOutlined, HeartOutlined, MoonOutlined } from "@ant-design/icons";
 import Fortune from "./components/fortune";
 import Compatibility from "./components/compatibility";
 const { Header, Content } = Layout;
@@ -29,14 +25,6 @@ export default function Stars() {
       ),
       value: "compatibility",
     },
-    // {
-    //   label: (
-    //     <Typography.Text>
-    //       <InfoCircleOutlined /> 星座资料
-    //     </Typography.Text>
-    //   ),
-    //   value: "info",
-    // },
   ];
   return (
     <CardMain
@@ -46,7 +34,7 @@ export default function Stars() {
     >
       <Header>
         <Radio.Group
-          className={styles.customRadio}
+          className={RadioStyle.customRadio}
           options={fnOptions}
           optionType="button"
           onChange={(e: RadioChangeEvent) => setActiveMode(e.target.value)}
@@ -54,14 +42,8 @@ export default function Stars() {
           buttonStyle="solid"
         />
       </Header>
-      <Content style={{marginTop: 5, height: "100%"}}>
-        {activeMode === "fortune" ? (
-          <Fortune />
-        ) : activeMode === "compatibility" ? (
-          <Compatibility />
-        ) : (
-          "info"
-        )}
+      <Content style={{ marginTop: 5, height: "100%" }}>
+        {activeMode === "fortune" ? <Fortune /> : <Compatibility />}
       </Content>
     </CardMain>
   );

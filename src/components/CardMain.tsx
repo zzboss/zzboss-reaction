@@ -13,10 +13,10 @@ const CardHeader: React.FC<CardMainProps> = ({icon, desc, title, children}) => {
   return (
     <Layout className={styles.container}>
       <Header className={styles.header}>
-        <Title className={styles.title} level={3}>
+        <Title className={styles.title} level={3} style={{color: 'var(--title-primary-color)'}}>
           {icon} {title}
         </Title>
-        <Title level={5} style={{ marginTop: 5 }}>
+        <Title level={5} style={{ marginTop: 10, color: 'var(--title-primary-color)' }}>
           {desc}
         </Title>
       </Header>

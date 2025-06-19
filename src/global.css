@@ -2,10 +2,12 @@
 :root {
   --border-color: #352148;
   --border-w: 1px;
-  --header-bg: linear-gradient(45deg, #111827 0%, #3b0764 100%);
-  --main-bg-t: linear-gradient(to bottom, #111827 0%, #3b0764 100%);
-  --main-bg: #111827;
+  --bg-gradient-to-bottom: linear-gradient(to bottom, #111827 0%, #3b0764 100%);
+  --bg-primary: #111827;
+  --bg-secondary: #15072eef;
   --text-color: #ebc0fd;
+
+  --title-primary-color: #b57feb;
 
   --fire: linear-gradient(to right bottom, #ef4444  0%, #ff9966 100%);
   --fire-primary: #ef4444;
@@ -21,35 +23,13 @@
   --air-secondary: #06b6d4;
 
 }
-/* 4K 专用字体 */
-@media (min-width: 2100px) {
-  :root {
-    --ant-font-size-base: 20px;
-    --ant-btn-font-size: 18px;
-    --ant-input-font-size: 16px;
-
-  }
-}
-
-/* 覆盖 Ant Design 组件字体 */
-.ant-btn {
-  font-size: var(--ant-btn-font-size) !important;
-}
-
-.ant-input {
-  font-size: var(--ant-input-font-size) !important;
-}
-
-.ant-select-selection-item {
-  font-size: var(--ant-font-size-base) !important;
-}
 
 * {
   margin: 0;
   padding: 0;
 }
 body {
-  background-color: var(--main-bg);
+  background-color: var(--bg-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;

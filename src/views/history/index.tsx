@@ -33,7 +33,7 @@ export default function History() {
   });
   const [historyList, setHistoryList] = useState<HistoryInfo[]>([]);
   const today = new Date();
-  const desc = `${today.getMonth() + 1}年${today.getDate()}日`;
+  const desc = `${today.getMonth() + 1}月${today.getDate()}日`;
   const getDetail = async (id: string) => {
     const historyDetail = (await getHistoryDetail(id)).data;
     historyDetail.content = historyDetail.content
@@ -79,6 +79,7 @@ export default function History() {
         <Text
           className={[
             styles.evDetail,
+            styles.scroll,
             detail.picNo > 0 ? styles.h30 : styles.h40,
           ].join(" ")}
         >
@@ -87,7 +88,7 @@ export default function History() {
         {detail.picNo > 0 ? (
           <Space className={styles.imgs}>
             {detail.picUrls.map((url) => (
-              <Image width={70} height={70} src={url} />
+              <Image width={70} height={70} src={url} key={url} />
             ))}
           </Space>
         ) : null}
@@ -97,7 +98,8 @@ export default function History() {
   return (
     <CardMain title="历史上的今天" desc={desc} icon={<HourglassOutlined />}>
       <Sider width={400}>
-        <Flex className={styles.historyList}>
+        <Flex className={[styles.historyList, styles.scroll].join(' ')}>
+
           <Timeline
             style={{ width: "20rem", margin: "auto" }}
             mode="alternate"

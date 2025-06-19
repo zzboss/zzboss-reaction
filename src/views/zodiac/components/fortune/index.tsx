@@ -58,7 +58,7 @@ export default function Fortune() {
   }, [activeZodiac.name, activeMode]);
   return (
     <Layout style={{ height: "100%" }}>
-      <Sider width={320} className={styles.sider}>
+      <Sider width={380} className={styles.sider}>
         <Flex gap={10} wrap justify="space-around">
           {ZODIACS_INFO.map((zodiac) => {
             return (

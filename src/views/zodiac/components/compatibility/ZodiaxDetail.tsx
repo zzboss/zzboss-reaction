@@ -2,7 +2,8 @@ import { Flex, Space, Tag, Typography } from "antd";
 import { ZodiacInfo } from "../../types/ZodiacType";
 import styles from "@/views/zodiac/styles/compatibility/zodiacDetail.module.css";
 
-export default function ZodiaxDetail({ cronInfo }: { cronInfo: ZodiacInfo }) {
+export default function ZodiaxDetail({ cronInfo }: { cronInfo: ZodiacInfo}) {
+
   return (
     <Flex vertical style={{ width: "100%" }} justify="center" align="center">
       <Space.Compact direction="vertical" style={{ width: "100%", backgroundColor: '#1f0639' }}>
@@ -13,7 +14,7 @@ export default function ZodiaxDetail({ cronInfo }: { cronInfo: ZodiacInfo }) {
           <Typography.Title level={4}>{cronInfo.name}</Typography.Title>
           <Typography.Text>{cronInfo.birthday}</Typography.Text>
         </div>
-        <Flex>
+        <Flex justify="center">
           <Flex
             vertical
             gap={10}
@@ -37,7 +38,7 @@ export default function ZodiaxDetail({ cronInfo }: { cronInfo: ZodiacInfo }) {
             </h3>
           </Flex>
         </Flex>
-        <Flex style={{padding: '0 0 10px 20px'}}>
+        <Flex style={{padding: '0 0 10px 0'}} justify='center'>
           {cronInfo.traits.map((trait) => (
             <Tag color={`var(--${cronInfo.attr}-secondary)`} key={cronInfo.name + '_' + trait}>{trait}</Tag>
           ))}

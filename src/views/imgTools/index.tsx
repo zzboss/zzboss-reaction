@@ -135,7 +135,7 @@ export default function Home() {
   };
 
   function renderImgList() {
-    // 通过 Row + Col 设置为一行两个
+    // 通过 Row + Col 设置为一行3个
     const targetArr = [];
     const cols = 3;
     const sp = 7;
@@ -208,7 +208,7 @@ export default function Home() {
         </Content>
       </Sider>
       <Content className={styles.displayContainer}>
-        <Flex justify="space-evenly" align="center" style={{ height: "100%", minWidth: '60vw' }}>
+        <Flex justify="space-evenly" align="center" style={{ height: "100%", minWidth: '60vw', padding: '0 10%' }}>
           <Flex vertical className={styles.mainImgContainer}>
             <Title level={4} className={styles.imgTitle}>
               原图
